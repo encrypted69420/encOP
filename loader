@@ -1,0 +1,1981 @@
+local function CheckSpy()
+    local isSpy = false
+    
+    if rawget(getgenv(), "ReGui") then isSpy = true end
+    if rawget(getgenv(), "Hook") then isSpy = true end
+    if rawget(getgenv(), "Http") then isSpy = true end
+    if rawget(_G, "HttpSpy") then isSpy = true end
+    if rawget(_G, "SimpleSpy") then isSpy = true end
+    if rawget(_G, "Hydroxide") then isSpy = true end
+    if rawget(getgenv(), "HttpSpy") then isSpy = true end
+    if rawget(getgenv(), "SimpleSpy") then isSpy = true end
+    
+    local gameData = rawget(getgenv(), "game")
+    if gameData and typeof(gameData) == "userdata" then
+        local meta = getmetatable(gameData)
+        if meta and rawget(meta, "__index") and typeof(rawget(meta, "__index")) == "function" then
+            isSpy = true
+        end
+    end
+    
+    local GameData = rawget(getgenv(), "Game")
+    if GameData and typeof(GameData) == "userdata" then
+        local meta = getmetatable(GameData)
+        if meta and rawget(meta, "__index") and typeof(rawget(meta, "__index")) == "function" then
+            isSpy = true
+        end
+    end
+    
+    local requestFunc = rawget(getgenv(), "request")
+    if requestFunc then
+        local source = debug.info(requestFunc, "s")
+        if source and source ~= "[C]" then
+            isSpy = true
+        end
+    end
+    
+    if rawget(getgenv(), "UrlIntercepts") then isSpy = true end
+    
+    return isSpy
+end
+
+if CheckSpy() then
+    return
+end
+
+local game = game
+local request = rawget(getgenv(), "request") or rawget(getgenv(), "http_request")
+
+local D = function()
+    error("iblameaabis", 0)
+end
+
+local S = setmetatable({}, {
+    __index = function(t, k)
+        local o, s = pcall(game.GetService, game, k)
+        if not o or not s then
+            D()
+        end
+        rawset(t, k, s)
+        return s
+    end
+})
+
+local function A()
+    local s = game:GetService("AnimationClipProvider"):GetMemStats()
+    local a, b = 0, 0
+    for k, v in pairs(s) do
+        if type(k) == "string" then
+            a = a + 1
+        end
+        if type(v) == "number" then
+            b = b + 1
+        end
+    end
+    return a > 0 and b > 0 and a == b
+end
+
+spawn(function()
+    while true do
+        task.wait(0.1)
+        task.wait(0.5)
+    end
+end)
+
+do
+    local m = S.MemStorageService
+    local s = math.log(100, 10)
+    m:SetItem("N1", tostring(s))
+    local b = tonumber(m:GetItem("N1"))
+    if b == nil or math.abs(b - 2) > 1e-9 then
+        D()
+    end
+end
+
+spawn(function()
+    while wait(2) do
+        local c = S.CollectionService
+        local t = "__dt_" .. tostring(math.floor(os.clock() * 1e6) % 999983)
+    end
+end)
+
+for i = 1, 60 do
+    spawn(function()
+        while true do
+            task.wait(math.random(50, 500) / 1000)
+        end
+    end)
+end
+
+spawn(function()
+    while true do
+        local s = S.SoundService
+        task.wait(3)
+    end
+end)
+
+spawn(function()
+    while true do
+        local c = workspace.CurrentCamera
+        task.wait(4)
+    end
+end)
+
+spawn(function()
+    while true do
+        if math.abs(math.sin(0)) > 1e-9 then
+            D()
+        end
+        task.wait(1)
+    end
+end)
+
+spawn(function()
+    while true do
+        if string.len("Veloix") ~= 6 then
+            D()
+        end
+        task.wait(2)
+    end
+end)
+
+local M = S.MemStorageService
+local L = math.log(100, 10)
+M:SetItem("N2", tostring(L))
+local B = tonumber(M:GetItem("N2"))
+if B == nil then
+    D()
+end
+if math.abs(B - 2) > 1e-5 then
+    D()
+end
+
+local C = S.CollectionService
+local T = "VH_" .. tostring(math.floor(math.log(8, 2) * 1000))
+local P = Instance.new("Part")
+P.Parent = workspace
+C:AddTag(P, T)
+local G = C:GetTagged(T)
+if type(G) ~= "table" then
+    D()
+end
+if #G ~= 1 then
+    D()
+end
+if G[1] ~= P then
+    D()
+end
+C:RemoveTag(P, T)
+local H = C:GetTagged(T)
+if #H ~= 0 then
+    D()
+end
+P:Destroy()
+
+local SS = S.SoundService
+local DF = SS.DistanceFactor
+if DF <= 0 then
+    D()
+end
+local V128 = DF * math.pi
+local V129 = V128 / math.pi
+if math.abs(V129 - DF) > 1e-5 then
+    D()
+end
+M:SetItem("N3", tostring(math.floor(V128 * 10000)))
+local V131 = tonumber(M:GetItem("N3"))
+if V131 == nil then
+    D()
+end
+if V131 ~= math.floor(V128 * 10000) then
+    D()
+end
+
+local LP = S.Players.LocalPlayer
+local MT = LP.MembershipType
+if typeof(MT) ~= "EnumItem" then
+    D()
+end
+if MT.EnumType ~= Enum.MembershipType then
+    D()
+end
+local V134 = MT == Enum.MembershipType.None or MT == Enum.MembershipType.Premium
+if not V134 then
+    D()
+end
+local V135 = MT.Value
+if type(V135) ~= "number" then
+    D()
+end
+if V135 ~= 0 and V135 ~= 4 then
+    D()
+end
+local V136 = MT.Name
+if V136 ~= "None" and V136 ~= "Premium" then
+    D()
+end
+
+local MS = S.MarketplaceService
+if typeof(MS.PromptPremiumPurchase) ~= "function" then
+    D()
+end
+
+local _s = tonumber or tostring
+local _h = { ["hook"] = 1, ["closure"] = 1 }
+local _c = 0
+pcall(function()
+    for k, v in next, getfenv() do
+        for p, _ in next, _h do
+            if _s(k):lower():find(p) then
+                _c = _c + 99
+            end
+        end
+    end
+end)
+
+local D1 = game:GetService(string.char(80, 108, 97, 121, 101, 114, 115)).LocalPlayer
+local D2 = D1.MembershipType
+local t1 = typeof(D2) == string.char(69, 110, 117, 109, 73, 116, 101, 109) and 1 or 0
+local t2 = D2.EnumType == Enum.MembershipType and 2 or 0
+local D3 = (D2 == Enum.MembershipType.None or D2 == Enum.MembershipType.Premium) and 4 or 0
+local D4 = D2.Value
+local t3 = type(D4) == string.char(110, 117, 109, 98, 101, 114) and 8 or 0
+local t4 = (D4 == 0 or D4 == 4) and 16 or 0
+local D5 = D2.Name
+local t5 = (D5 == string.char(78, 111, 110, 101) or D5 == string.char(80, 114, 101, 109, 105, 117, 109)) and 32 or 0
+local D6 = game:GetService(string.char(77, 97, 114, 107, 101, 116, 112, 108, 97, 99, 101, 83, 101, 114, 118, 105, 99, 101))
+local D7 = typeof(D6.PromptPremiumPurchase) == string.char(102, 117, 110, 99, 116, 105, 111, 110) and 64 or 0
+local t8 = 128
+local t9 = 256
+local t10 = 512
+
+pcall(function()
+    local s1 = game:FindService(string.char(80, 108, 97, 121, 101, 114, 115))
+    local s2 = game:FindService(string.char(77, 97, 114, 107, 101, 116, 112, 108, 97, 99, 101, 83, 101, 114, 118, 105, 99, 101))
+    if not rawequal(s1, D1.Parent) or not rawequal(s2, D6) then
+        t10 = 0
+    end
+    if rawequal(game.GetService, nil) or rawequal(game.FindService, nil) then
+        t10 = 0
+    end
+end)
+
+local t11 = 1024
+pcall(function()
+    if debug.info(pcall, string.char(115)) ~= string.char(91, 67, 93) then
+        t11 = 0
+    end
+    if debug.info(rawequal, string.char(115)) ~= string.char(91, 67, 93) then
+        t11 = 0
+    end
+end)
+
+local t12 = 2048
+pcall(function()
+    local g = getrawmetatable and getrawmetatable(game) or {}
+    if type(g) == string.char(116, 97, 98, 108, 101) then
+        local n = rawget(g, string.char(95, 95, 110, 97, 109, 101, 99, 97, 108, 108))
+        if n and debug.info(n, string.char(115)) ~= string.char(91, 67, 93) then
+            t12 = 0
+        end
+    end
+end)
+
+local TR = false
+local ok, er = pcall(function()
+    local c1 = game.ClassName == "DataModel"
+    local c2 = workspace.ClassName == "Workspace"
+    local c3 = typeof(Enum.Material.Plastic) == "EnumItem"
+    local c4 = Enum.Material.Plastic.Value == 256
+    local c5 = typeof(game.Changed) == "RBXScriptSignal"
+    local c6 = typeof(workspace.Changed) == "RBXScriptSignal"
+    local rs = S.RunService
+    local c7 = rs.ClassName == "RunService"
+    local c8 = typeof(rs.Heartbeat) == "RBXScriptSignal"
+    local c9 = rs:IsClient() ~= rs:IsServer()
+    local p = Instance.new("Part")
+    local c10 = typeof(p) == "Instance" and p.ClassName == "Part"
+    p:Destroy()
+    local c11 = workspace:GetFullName() == "Workspace"
+    local cf = CFrame.new(1, 2, 3)
+    local c12 = cf.X == 1 and cf.Y == 2 and cf.Z == 3
+    local t1 = workspace.DistributedGameTime
+    task.wait(0.1)
+    local t2 = workspace.DistributedGameTime
+    local c13 = (t2 - t1) > 0
+    local go, gu = pcall(function()
+        return S.HttpService:GenerateGUID(false)
+    end)
+    local c14 = go and #gu == 36 and gu:sub(9, 9) == "-"
+    local ch = { c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14 }
+    local p = 0
+    for _, v in ipairs(ch) do
+        if v then
+            p = p + 1
+        end
+    end
+    if p < #ch then
+        TR = true
+    end
+end)
+if not ok then
+    TR = true
+end
+if TR then
+    task.delay(math.random(6, 7), function() end)
+    return
+end
+
+local V139 = pcall(function()
+    local V140 = S.AnimationClipProvider
+    if V140 == nil then
+        error("detected", 2)
+    end
+    if not A() then
+        error("detected", 2)
+    end
+    local V146 = S.Players
+    local V147 = V146:GetCharacterAppearanceInfoAsync(1)
+    if type(V147) ~= "table" then
+        error("detected", 2)
+    end
+    if type(V147.assets) ~= "table" then
+        error("detected", 2)
+    end
+    if type(V147.bodyColors) ~= "table" then
+        error("detected", 2)
+    end
+    if type(V147.scales) ~= "table" then
+        error("detected", 2)
+    end
+    local V148 = { "bodyType", "head", "height", "proportion", "depth", "width" }
+    for _, V149 in pairs(V148) do
+        if type(V147.scales[V149]) ~= "number" then
+            error("detected", 2)
+        end
+    end
+    local V150 = { "leftArmColorId", "torsoColorId", "rightArmColorId", "headColorId", "leftLegColorId", "rightLegColorId" }
+    for _, V151 in pairs(V150) do
+        if type(V147.bodyColors[V151]) ~= "number" then
+            error("detected", 2)
+        end
+    end
+    if #V147.assets == 0 then
+        error("detected", 2)
+    end
+    for _, V152 in pairs(V147.assets) do
+        if type(V152.id) ~= "number" then
+            error("detected", 2)
+        end
+        if type(V152.name) ~= "string" then
+            error("detected", 2)
+        end
+        if type(V152.assetType) ~= "table" then
+            error("detected", 2)
+        end
+        if type(V152.assetType.name) ~= "string" then
+            error("detected", 2)
+        end
+    end
+end)
+if not V139 then
+    error("detected", 2)
+end
+
+do
+    local s, e = pcall(function()
+        if not A() then
+            error("Veloix", 2)
+        end
+        local p = game:GetService("Players"):GetCharacterAppearanceInfoAsync(1)
+        if type(p) ~= "table" or type(p.assets) ~= "table" or #p.assets == 0 then
+            error("Veloix", 2)
+        end
+    end)
+    if not s then
+        error("detected", 2)
+    end
+end
+
+local R = t1 + t2 + t3 + t4 + t5 + D3 + D7 + t8 + t9 + t10 + t11 + t12
+local F = false
+pcall(function()
+    if _s(type):find(string.char(46, 108, 117, 97)) then
+        F = true
+    end
+end)
+local DIS = {
+    [4095] = function()
+        if _c == 0 and not F then
+        else
+            error("detected", 0)
+        end
+    end
+}
+DIS[R]()
+
+local n = 0
+local function C(f)
+    local s, r = pcall(f)
+    if not s or not r then
+        local p = math.floor(n / 38 * 100)
+        print("Check " .. p .. "% failed")
+        return false
+    end
+    n = n + 1
+    return true
+end
+
+if not C(function()
+    local c = workspace.CurrentCamera
+    local r = c:ScreenPointToRay(100, 100)
+    return typeof(r.Origin) == "Vector3"
+end) then
+    return
+end
+
+if not C(function()
+    local cf = CFrame.new(5, 2, 1)
+    local p = Vector3.new(1, 0, 0)
+    local o = cf:PointToObjectSpace(cf:PointToWorldSpace(p))
+    return (o - p).Magnitude < 1e-6
+end) then
+    return
+end
+
+if not C(function()
+    return Enum.Font.SourceSans.Name == "SourceSans"
+end) then
+    return
+end
+
+if not C(function()
+    local ts = game:GetService("TweenService")
+    local p = Instance.new("Part")
+    local t = ts:Create(p, TweenInfo.new(.1), { Transparency = 1 })
+    p:Destroy()
+    return typeof(t) == "Instance" and t:IsA("Tween")
+end) then
+    return
+end
+
+if not C(function()
+    return typeof(game:GetService("SoundService").AmbientReverb) == "EnumItem"
+end) then
+    return
+end
+
+if not C(function()
+    return typeof(game:GetService("SoundService").RespectFilteringEnabled) == "boolean"
+end) then
+    return
+end
+
+if not C(function()
+    return typeof(game:GetService("Lighting"):GetMinutesAfterMidnight()) == "number"
+end) then
+    return
+end
+
+if not C(function()
+    local l = game:GetService("Lighting")
+    local o = l.ClockTime
+    l.ClockTime = 12
+    local ok = l.ClockTime == 12
+    l.ClockTime = o
+    return ok
+end) then
+    return
+end
+
+if not C(function()
+    local p = Instance.new("Part", workspace)
+    local n = p:GetFullName()
+    p:Destroy()
+    return typeof(n) == "string" and n:find("Workspace")
+end) then
+    return
+end
+
+if not C(function()
+    local ps = game:GetService("PhysicsService")
+    return typeof(ps:GetCollisionGroupId("Default")) == "number"
+end) then
+    return
+end
+
+if not C(function()
+    local rp = RaycastParams.new()
+    return rp.IgnoreWater == false
+end) then
+    return
+end
+
+if not C(function()
+    return typeof(Instance.new("HumanoidDescription")) == "Instance"
+end) then
+    return
+end
+
+if not C(function()
+    return typeof(game:GetService("VRService"):GetUserCFrame(Enum.UserCFrame.Head)) == "CFrame"
+end) then
+    return
+end
+
+if not C(function()
+    local rp = RaycastParams.new()
+    rp.CollisionGroup = "Default"
+    return rp.CollisionGroup == "Default"
+end) then
+    return
+end
+
+if not C(function()
+    local r = Region3int16.new(Vector3int16.new(0, 0, 0), Vector3int16.new(10, 10, 10))
+    return typeof(r) == "Region3int16"
+end) then
+    return
+end
+
+if not C(function()
+    return typeof(OverlapParams.new()) == "OverlapParams"
+end) then
+    return
+end
+
+if not C(function()
+    local o = OverlapParams.new()
+    o.FilterType = Enum.RaycastFilterType.Whitelist
+    return o.FilterType == Enum.RaycastFilterType.Whitelist
+end) then
+    return
+end
+
+if not C(function()
+    return typeof(workspace.Terrain.WriteVoxels) == "function"
+end) then
+    return
+end
+
+if not C(function()
+    local m = Instance.new("MeshPart")
+    local ok = typeof(m.DoubleSided) == "boolean" and typeof(m.RenderFidelity) == "EnumItem"
+    m:Destroy()
+    return ok
+end) then
+    return
+end
+
+if not C(function()
+    return typeof(game:GetService("UserInputService"):GetLastInputType()) == "EnumItem"
+end) then
+    return
+end
+
+if not C(function()
+    return typeof(game:GetService("GuiService"):GetGuiInset()) == "Vector2"
+end) then
+    return
+end
+
+if not C(function()
+    return typeof(game:GetService("GuiService"):IsTenFootInterface()) == "boolean"
+end) then
+    return
+end
+
+if not C(function()
+    local g = game:GetService("HttpService"):GenerateGUID(false)
+    return typeof(g) == "string" and #g > 5
+end) then
+    return
+end
+
+if not C(function()
+    return typeof(game:GetService("Stats").PerformanceStats) == "Instance"
+end) then
+    return
+end
+
+if not C(function()
+    local l = game:GetService("LocalizationService")
+    local pl = game.Players.LocalPlayer
+    if not pl then
+        return false
+    end
+    local ok, tr = pcall(function()
+        return l:GetTranslatorForPlayerAsync(pl)
+    end)
+    return ok and typeof(tr) == "Instance"
+end) then
+    return
+end
+
+if not C(function()
+    return typeof(workspace:GetServerTimeNow()) == "number"
+end) then
+    return
+end
+
+if not C(function()
+    local f = Instance.new("Folder")
+    f:SetAttribute("x", 123)
+    local v = f:GetAttribute("x")
+    f:Destroy()
+    return v == 123
+end) then
+    return
+end
+
+if not C(function()
+    local p = Instance.new("Part", workspace)
+    local pr = Instance.new("ProximityPrompt", p)
+    pr.ActionText = "Use"
+    local ok = pr.ActionText == "Use"
+    p:Destroy()
+    return ok
+end) then
+    return
+end
+
+if not C(function()
+    local h = Instance.new("Highlight")
+    h.FillColor = Color3.new(1, 0, 0)
+    local ok = typeof(h.FillColor) == "Color3"
+    h:Destroy()
+    return ok
+end) then
+    return
+end
+
+if not C(function()
+    local p1 = Instance.new("Part", workspace)
+    local p2 = Instance.new("Part", workspace)
+    local w = Instance.new("WeldConstraint", p1)
+    w.Part0 = p1
+    w.Part1 = p2
+    local ok = w.Part0 == p1 and w.Part1 == p2
+    p1:Destroy()
+    p2:Destroy()
+    return ok
+end) then
+    return
+end
+
+if not C(function()
+    local a = Instance.new("AlignOrientation")
+    local ok = typeof(a) == "Instance"
+    a:Destroy()
+    return ok
+end) then
+    return
+end
+
+if not C(function()
+    local pl = game.Players.LocalPlayer
+    if not pl then
+        return false
+    end
+    local pg = pl:FindFirstChild("PlayerGui")
+    return pg == nil or typeof(pg) == "Instance"
+end) then
+    return
+end
+
+if not C(function()
+    local a = Instance.new("Actor")
+    local ok = typeof(a) == "Instance"
+    a:Destroy()
+    return ok
+end) then
+    return
+end
+
+if not C(function()
+    return typeof(game:GetService("TextChatService").ChatVersion) == "EnumItem"
+end) then
+    return
+end
+
+if not C(function()
+    return Enum.EasingStyle.Bounce.Name == "Bounce"
+end) then
+    return
+end
+
+if not C(function()
+    local d = Instance.new("HumanoidDescription")
+    return typeof(d.BodyTypeScale) == "number"
+end) then
+    return
+end
+
+if not C(function()
+    local t = setmetatable({}, {
+        __tostring = function()
+            return "ok"
+        end
+    })
+    return tostring(t) == "ok"
+end) then
+    return
+end
+
+local LS = tonumber or tostring
+local LC = 0
+pcall(function()
+    for k, v in next, getfenv() do
+        if type(k) == "string" and (k:lower():find("hook") or k:lower():find("closure")) then
+            LC = 1
+        end
+    end
+end)
+
+local L1 = game:GetService(string.char(80, 108, 97, 121, 101, 114, 115)).LocalPlayer
+local L2 = L1.MembershipType
+local Lt1 = (typeof(L2) == string.char(69, 110, 117, 109, 73, 116, 101, 109) and L2.EnumType == Enum.MembershipType and (L2.Value == 0 or L2.Value == 4)) and 1 or 0
+local Lt2 = 1
+pcall(function()
+    local s1 = game:FindService(string.char(80, 108, 97, 121, 101, 114, 115))
+    if not rawequal(s1, L1.Parent) then
+        Lt2 = 0
+    end
+end)
+
+local Lt3 = 1
+pcall(function()
+    if type(pcall) ~= "function" or type(rawequal) ~= "function" then
+        Lt3 = 0
+    end
+end)
+
+local Lt4 = 1
+pcall(function()
+    local fps = workspace:GetRealPhysicsFPS()
+    if type(fps) ~= "number" or fps <= 0 or fps > 300 then
+        Lt4 = 0
+    end
+end)
+
+local Lt5 = 1
+pcall(function()
+    local h = game:GetService("HttpService")
+    local g1 = h:GenerateGUID(false)
+    local g2 = h:GenerateGUID(false)
+    if g1 == g2 or #g1 ~= 36 then
+        Lt5 = 0
+    end
+end)
+
+local Lt6 = 1
+pcall(function()
+    local t1 = os.clock()
+    for i = 1, 500 do
+        local a, b = "x", "x"
+        local c = (a == b)
+    end
+    local d1 = os.clock() - t1
+    local t2 = os.clock()
+    for i = 1, 500 do
+        local a, b = "x" .. i, "x" .. i
+        local c = (a == b)
+    end
+    local d2 = os.clock() - t2
+    if d1 >= d2 * 2 then
+        Lt6 = 0
+    end
+end)
+
+local Lt7 = 1
+pcall(function()
+    local nan = 0 / 0
+    if math.max(nan, 1) == math.max(nan, 1) and nan == nan then
+        Lt7 = 0
+    end
+end)
+
+local Lt8 = 1
+pcall(function()
+    local c = 0
+    local f1 = function()
+        c = c + 1
+    end
+    local f2 = function()
+        return c
+    end
+    local t1 = os.clock()
+    for i = 1, 1000 do
+        f1()
+    end
+    local d1 = os.clock() - t1
+    local t2 = os.clock()
+    for i = 1, 1000 do
+        f2()
+    end
+    local d2 = os.clock() - t2
+    if d1 <= d2 * 0.3 or d1 >= d2 * 10 then
+        Lt8 = 0
+    end
+end)
+
+local Lt9 = 1
+local Lt10 = 1
+pcall(function()
+    local m = game:GetService("MemStorageService")
+    m:SetItem("Veloix_x", "v")
+    if m:GetItem("Veloix_x") ~= "v" then
+        Lt10 = 0
+    end
+end)
+
+local Lt11 = 1
+pcall(function()
+    local g_id = game:GetDebugId(0)
+    local w_id = workspace:GetDebugId(0)
+    if g_id == w_id or type(g_id) ~= "string" or #g_id == 0 then
+        Lt11 = 0
+    end
+end)
+
+if LC > 0 or Lt1 + Lt2 + Lt3 + Lt4 + Lt5 + Lt6 + Lt7 + Lt8 + Lt9 + Lt10 + Lt11 ~= 11 then
+    error("iblameaabis", 0)
+else
+end
+
+local RED_ACCENT = Color3.fromRGB(60, 60, 70)
+local RED_BRIGHT = Color3.fromRGB(80, 80, 90)
+local RED_DARK = Color3.fromRGB(40, 40, 50)
+local DARK = Color3.fromRGB(5, 5, 8)
+local DARK_GLASS = Color3.fromRGB(10, 10, 14)
+local PANEL = Color3.fromRGB(16, 16, 21)
+local FIELD = Color3.fromRGB(19, 19, 25)
+local TEXT = Color3.fromRGB(248, 248, 250)
+local SUBTEXT = Color3.fromRGB(158, 158, 170)
+local MUTED = Color3.fromRGB(88, 88, 100)
+local SUCCESS = Color3.fromRGB(70, 220, 145)
+
+local correctKeys = {
+    "EH#1",
+    "Eh#1",
+    "eh1",
+    "eH#1"
+}
+
+local LocalPlayer = game.Players.LocalPlayer
+local TweenService = game:GetService("TweenService")
+local Lighting = game:GetService("Lighting")
+
+local KEY_FILE = "EnchantedHub_Key.txt"
+local KEY_LINK = "https://enchanted-hub-key.netlify.app/"
+local KEY_DURATION = 48 * 60 * 60
+
+local function IsValidKey(key)
+    for _, validKey in ipairs(correctKeys) do
+        if key == validKey then
+            return true
+        end
+    end
+    return false
+end
+
+local function SaveKey(key)
+    pcall(function()
+        if writefile then
+            writefile(KEY_FILE, key .. "|" .. tostring(os.time()))
+        end
+    end)
+end
+
+local function DeleteSavedKey()
+    pcall(function()
+        if isfile and isfile(KEY_FILE) and delfile then
+            delfile(KEY_FILE)
+        end
+    end)
+end
+
+local function GetSavedKey()
+    local savedData
+
+    pcall(function()
+        if isfile and isfile(KEY_FILE) then
+            savedData = readfile(KEY_FILE)
+        end
+    end)
+
+    if not savedData or savedData == "" then
+        return nil
+    end
+
+    local key, timestamp = savedData:match("^(.-)|(%d+)$")
+
+    if not key or not timestamp then
+        DeleteSavedKey()
+        return nil
+    end
+
+    timestamp = tonumber(timestamp)
+
+    if not timestamp then
+        DeleteSavedKey()
+        return nil
+    end
+
+    if os.time() - timestamp >= KEY_DURATION then
+        DeleteSavedKey()
+        return nil
+    end
+
+    if IsValidKey(key) then
+        return key
+    end
+
+    DeleteSavedKey()
+    return nil
+end
+
+local function GetRemainingTime()
+    local remaining
+
+    pcall(function()
+        if isfile and isfile(KEY_FILE) then
+            local data = readfile(KEY_FILE)
+            local _, timestamp = data:match("^(.-)|(%d+)$")
+
+            if timestamp then
+                remaining = KEY_DURATION - (os.time() - tonumber(timestamp))
+            end
+        end
+    end)
+
+    return math.max(remaining or 0, 0)
+end
+
+local function FormatRemainingTime(seconds)
+    local hours = math.floor(seconds / 3600)
+    local minutes = math.floor((seconds % 3600) / 60)
+
+    if hours > 0 then
+        return string.format("%dh %02dm remaining", hours, minutes)
+    end
+
+    return string.format("%dm remaining", minutes)
+end
+
+local function Tween(object, duration, properties, style, direction)
+    return TweenService:Create(
+        object,
+        TweenInfo.new(
+            duration,
+            style or Enum.EasingStyle.Quint,
+            direction or Enum.EasingDirection.Out
+        ),
+        properties
+    )
+end
+
+local function Corner(object, radius)
+    local corner = Instance.new("UICorner")
+    corner.CornerRadius = UDim.new(0, radius)
+    corner.Parent = object
+    return corner
+end
+
+local function AddStroke(object, color, thickness, transparency)
+    local stroke = Instance.new("UIStroke")
+    stroke.Color = color
+    stroke.Thickness = thickness or 1
+    stroke.Transparency = transparency or 0
+    stroke.Parent = object
+    return stroke
+end
+
+local function CreateLoadingScreen()
+    local loadingGui = Instance.new("ScreenGui")
+    loadingGui.Name = "EnchantedHubLoading"
+    loadingGui.IgnoreGuiInset = true
+    loadingGui.ResetOnSpawn = false
+    loadingGui.DisplayOrder = 999
+    loadingGui.Parent = LocalPlayer:WaitForChild("PlayerGui")
+
+    local background = Instance.new("Frame")
+    background.Size = UDim2.fromScale(1, 1)
+    background.BackgroundColor3 = DARK
+    background.BorderSizePixel = 0
+    background.Parent = loadingGui
+
+    local gradient = Instance.new("UIGradient")
+    gradient.Rotation = 135
+    gradient.Color = ColorSequence.new({
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(20, 20, 26)),
+        ColorSequenceKeypoint.new(0.45, Color3.fromRGB(6, 6, 9)),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(2, 2, 4))
+    })
+    gradient.Parent = background
+
+    local logoHolder = Instance.new("Frame")
+    logoHolder.Size = UDim2.new(0, 82, 0, 82)
+    logoHolder.Position = UDim2.new(0.5, -41, 0.5, -125)
+    logoHolder.BackgroundColor3 = Color3.fromRGB(28, 7, 14)
+    logoHolder.BorderSizePixel = 0
+    logoHolder.Parent = background
+
+    Corner(logoHolder, 22)
+    AddStroke(logoHolder, RED_ACCENT, 1.5, 0.15)
+
+    local logo = Instance.new("ImageLabel")
+    logo.Size = UDim2.new(1, -12, 1, -12)
+    logo.Position = UDim2.fromScale(0.5, 0.5)
+    logo.AnchorPoint = Vector2.new(0.5, 0.5)
+    logo.BackgroundTransparency = 1
+    logo.Image = "rbxassetid://133133211070548"
+    logo.ScaleType = Enum.ScaleType.Fit
+    logo.Parent = logoHolder
+
+    local title = Instance.new("TextLabel")
+    title.Size = UDim2.new(0, 450, 0, 35)
+    title.Position = UDim2.new(0.5, -225, 0.5, -22)
+    title.BackgroundTransparency = 1
+    title.Text = "ENCHANTED HUB"
+    title.Font = Enum.Font.GothamBlack
+    title.TextSize = 25
+    title.TextColor3 = TEXT
+    title.Parent = background
+
+    local line = Instance.new("Frame")
+    line.Size = UDim2.new(0, 70, 0, 2)
+    line.Position = UDim2.new(0.5, -35, 0.5, 22)
+    line.BackgroundColor3 = RED_ACCENT
+    line.BorderSizePixel = 0
+    line.Parent = background
+
+    Corner(line, 2)
+
+    local loadingText = Instance.new("TextLabel")
+    loadingText.Size = UDim2.new(0, 300, 0, 25)
+    loadingText.Position = UDim2.new(0.5, -150, 0.5, 42)
+    loadingText.BackgroundTransparency = 1
+    loadingText.Text = "Loading"
+    loadingText.Font = Enum.Font.GothamMedium
+    loadingText.TextSize = 12
+    loadingText.TextColor3 = SUBTEXT
+    loadingText.Parent = background
+
+    task.spawn(function()
+        local dots = 0
+
+        while loadingGui.Parent do
+            dots = dots % 3 + 1
+            loadingText.Text = "Loading" .. string.rep(".", dots)
+            task.wait(0.4)
+        end
+    end)
+
+    task.wait(2)
+
+    if loadingGui.Parent then
+        loadingGui:Destroy()
+    end
+end
+
+local function ExecuteHub()
+local Loader = {}
+Loader.__index = Loader
+
+function Loader.new(cfg)
+    local self = setmetatable({}, Loader)
+    self.cfg = cfg
+    local fluentOk, fluentLib = pcall(function()
+        return loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+    end)
+    if not fluentOk or not fluentLib then
+        warn("[Script Loader] Failed to load Fluent UI library!")
+        return self
+    end
+    self.libs = { Fluent = fluentLib }
+    self:_initUI()
+    return self
+end
+
+function Loader:_initUI()
+    if not self.libs.Fluent then
+        warn("[Script Loader] Fluent UI not available, cannot create window.")
+        return
+    end
+    local win = self.libs.Fluent:CreateWindow(self.cfg.Window)
+    if not win then
+        warn("[Script Loader] Failed to create Fluent window.")
+        return
+    end
+    self.window = win
+    self.tabs = {
+        Scripts = win:AddTab({ Title = "Scripts", Icon = "list" }),
+        Info = win:AddTab({ Title = "Info", Icon = "info" })
+    }
+    self:_addScriptButtons()
+    self:_addInfo()
+end
+
+function Loader:_addScriptButtons()
+    local scripts = self.cfg.Scripts
+    for i = 1, #scripts do
+        local script = scripts[i]
+        self.tabs.Scripts:AddButton({
+            Title = script.Name,
+            Description = "Click to load " .. script.Name,
+            Tooltip = script.Url,
+            Callback = function()
+                self:_loadScript(script.Url)
+            end
+        })
+    end
+end
+
+function Loader:_loadScript(url)
+    self.libs.Fluent:Notify({ Title = "Loading...", Content = url, Duration = 3 })
+    if self.window and self.window.Destroy then
+        self.window:Destroy()
+    end
+    if self.libs.Fluent and self.libs.Fluent.Unload then
+        self.libs.Fluent:Unload()
+    end
+    local ok, err = pcall(function()
+        loadstring(game:HttpGet(url))()
+    end)
+    if not ok then
+        warn("[Script Loader Error]", err)
+    end
+end
+
+function Loader:_addInfo()
+    self.tabs.Info:AddParagraph({
+        Title = "About",
+        Content = "Script Loader by @iamvyxon\nGitHub: https://github.com/iamvyxon\n\nSelect a script from the Scripts tab. Confirm before loading. Loader UI will close after loading."
+    })
+end
+
+local Config = {
+    Window = {
+        Title        = "Enchanted Hub Loader",
+        SubTitle     = "Loader by @iamvyxon | Scripts by @iblameaabis",
+        TabWidth     = 160,
+        Size         = UDim2.fromOffset(580, 460),
+        Acrylic      = true,
+        Theme        = "Viow Mars",
+        MinimizeKey  = Enum.KeyCode.LeftControl
+    },
+    Scripts = {
+        {
+            Name = "+1 Drain Water Per Click",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_1_Drain_Water.txt"
+        },
+        {
+            Name = "+1 Football For Brainrots",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Football_For_Brain.txt"
+        },
+        {
+            Name = "+1 Speed Monkey Escape",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Monkey_Esc.txt"
+        },
+        {
+            Name = "+1 Speed Bridge Build",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Speed_Bridge_Build.txt"
+        },
+        {
+            Name = "+1 Speed Collect Minions",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Speed_Collect_Minion.txt"
+        },
+        {
+            Name = "+1 Speed Per Click",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Speed_Per_Click.txt"
+        },
+        {
+            Name = "+1 Speedster Escape",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Speedster_Escape.txt"
+        },
+        {
+            Name = "Basketball Legends",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_BasketBall_Legends.txt"
+        },
+        {
+            Name = "Be a Lucky Block",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Be_A_Lucky_Block.txt"
+        },
+        {
+            Name = "Blade Ball",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Hub_Blade_Ball.lua.txt"
+        },
+        {
+            Name = "Build A Boat For Treasure",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_babft.txt"
+        },
+        {
+            Name = "Bubble Gum Simulator",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_BubbleGum.txt"
+        },
+        {
+            Name = "Car Dealership Tycoon",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Car_Dealership.txt"
+        },
+        {
+            Name = "Demonology",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Demonology.txt"
+        },
+        {
+            Name = "Jump For Animals",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Jump_For_Animals.lua.txt"
+        },
+        {
+            Name = "Knife Duels",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Knife_VS_Duels.txt"
+        },
+        {
+            Name = "Legends of Speed",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Los.txt"
+        },
+        {
+            Name = "Lift a Cube",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Lift_A_Cube.txt"
+        },
+        {
+            Name = "Merge A Nuke",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Merge_Nuke.txt"
+        },
+        {
+            Name = "Midnight Chasers: Highway Racing",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Midnight_Chaser.txt"
+        },
+        {
+            Name = "Murder Mystery 2",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_MM2.txt"
+        },
+        {
+            Name = "Muscle Legends",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_ML.txt"
+        },
+        {
+            Name = "One Tap",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_OneTap.txt"
+        },
+        {
+            Name = "Operation One",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_OneTap.txt"
+        },
+        {
+            Name = "Pet Simulator 99",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_PS99.txt"
+        },
+        {
+            Name = "Plants vs Brainrots",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Plants_V_Brainrots.txt"
+        },
+        {
+            Name = "Ride A Pet",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Ride_A_Pet.lua.txt"
+        },
+        {
+            Name = "Sell Lemons",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Sell_Lemons.txt"
+        },
+        {
+            Name = "Sniper Arena",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Sniper_Arena.txt"
+        },
+        {
+            Name = "Steal And Hatch Anime Eggs",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Steal_And_Hatch_Anime_Eggs.txt"
+        },
+        {
+            Name = "Steal Animal Egg",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Steal_Animal_Egg.txt"
+        }, 
+        {
+            Name = "Supermarket Simulator",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Supermarket.txt"
+        },
+        {
+            Name = "Survive Zombie Arena",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Survive_Zombie.txt"
+        }
+    },
+}
+
+Loader.new(Config)
+end
+
+local savedKey = GetSavedKey()
+
+if savedKey and IsValidKey(savedKey) then
+    CreateLoadingScreen()
+    ExecuteHub()
+    return
+end
+
+local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
+
+local oldGui = PlayerGui:FindFirstChild("EnchantedKeySystem")
+if oldGui then
+    oldGui:Destroy()
+end
+
+local oldBlur = Lighting:FindFirstChild("EnchantedBlur")
+if oldBlur then
+    oldBlur:Destroy()
+end
+
+local gui = Instance.new("ScreenGui")
+gui.Name = "EnchantedKeySystem"
+gui.ResetOnSpawn = false
+gui.IgnoreGuiInset = true
+gui.DisplayOrder = 999
+gui.Parent = PlayerGui
+
+local blur = Instance.new("BlurEffect")
+blur.Name = "EnchantedBlur"
+blur.Size = 0
+blur.Parent = Lighting
+
+local main = Instance.new("Frame")
+main.Name = "MainFrame"
+main.Size = UDim2.new(0, 470, 0, 330)
+main.Position = UDim2.new(0.5, 0, 0.5, 40)
+main.AnchorPoint = Vector2.new(0.5, 0.5)
+main.BackgroundColor3 = DARK_GLASS
+main.BackgroundTransparency = 0.03
+main.BorderSizePixel = 0
+main.Active = true
+main.Draggable = true
+main.ZIndex = 10
+main.Parent = gui
+
+Corner(main, 24)
+
+local mainStroke = AddStroke(main, RED_ACCENT, 1.2, 0.28)
+
+local mainGradient = Instance.new("UIGradient")
+mainGradient.Rotation = 135
+mainGradient.Color = ColorSequence.new({
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(20, 20, 26)),
+    ColorSequenceKeypoint.new(0.32, Color3.fromRGB(12, 12, 16)),
+    ColorSequenceKeypoint.new(0.7, Color3.fromRGB(8, 8, 12)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(18, 18, 24))
+})
+mainGradient.Parent = main
+
+local headerLine = Instance.new("Frame")
+headerLine.Size = UDim2.new(1, -44, 0, 1)
+headerLine.Position = UDim2.new(0, 22, 0, 74)
+headerLine.BackgroundColor3 = Color3.fromRGB(45, 45, 52)
+headerLine.BorderSizePixel = 0
+headerLine.ZIndex = 14
+headerLine.Parent = main
+
+local logoHolder = Instance.new("Frame")
+logoHolder.Size = UDim2.new(0, 52, 0, 52)
+logoHolder.Position = UDim2.new(0, 22, 0, 11)
+logoHolder.BackgroundColor3 = Color3.fromRGB(24, 24, 30)
+logoHolder.BorderSizePixel = 0
+logoHolder.ZIndex = 15
+logoHolder.Parent = main
+
+Corner(logoHolder, 16)
+AddStroke(logoHolder, RED_ACCENT, 1.1, 0.12)
+
+local logo = Instance.new("ImageLabel")
+logo.Size = UDim2.new(1, -9, 1, -9)
+logo.Position = UDim2.fromScale(0.5, 0.5)
+logo.AnchorPoint = Vector2.new(0.5, 0.5)
+logo.BackgroundTransparency = 1
+logo.Image = "rbxassetid://133133211070548"
+logo.ScaleType = Enum.ScaleType.Fit
+logo.ZIndex = 16
+logo.Parent = logoHolder
+
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(0, 280, 0, 27)
+title.Position = UDim2.new(0, 88, 0, 12)
+title.BackgroundTransparency = 1
+title.Text = "ENCHANTED HUB"
+title.TextColor3 = TEXT
+title.Font = Enum.Font.GothamBlack
+title.TextSize = 21
+title.TextXAlignment = Enum.TextXAlignment.Left
+title.ZIndex = 15
+title.Parent = main
+
+local subtitle = Instance.new("TextLabel")
+subtitle.Size = UDim2.new(0, 280, 0, 17)
+subtitle.Position = UDim2.new(0, 89, 0, 40)
+subtitle.BackgroundTransparency = 1
+subtitle.Text = "SECURE KEY SYSTEM"
+subtitle.TextColor3 = RED_BRIGHT
+subtitle.Font = Enum.Font.GothamBold
+subtitle.TextSize = 9
+subtitle.TextXAlignment = Enum.TextXAlignment.Left
+subtitle.ZIndex = 15
+subtitle.Parent = main
+
+local closeBtn = Instance.new("TextButton")
+closeBtn.Size = UDim2.new(0, 35, 0, 35)
+closeBtn.Position = UDim2.new(1, -57, 0, 20)
+closeBtn.BackgroundColor3 = PANEL
+closeBtn.Text = "X"
+closeBtn.TextColor3 = SUBTEXT
+closeBtn.Font = Enum.Font.GothamBold
+closeBtn.TextSize = 12
+closeBtn.AutoButtonColor = false
+closeBtn.ZIndex = 20
+closeBtn.Parent = main
+
+Corner(closeBtn, 11)
+
+local closeStroke = AddStroke(
+    closeBtn,
+    Color3.fromRGB(48, 48, 55),
+    1,
+    0
+)
+
+local profileCard = Instance.new("Frame")
+profileCard.Size = UDim2.new(0, 205, 0, 70)
+profileCard.Position = UDim2.new(0, 22, 0, 91)
+profileCard.BackgroundColor3 = PANEL
+profileCard.BackgroundTransparency = 0.25
+profileCard.BorderSizePixel = 0
+profileCard.ZIndex = 14
+profileCard.Parent = main
+
+Corner(profileCard, 14)
+AddStroke(profileCard, Color3.fromRGB(38, 38, 45), 1, 0)
+
+local playerAvatar = Instance.new("ImageLabel")
+playerAvatar.Size = UDim2.new(0, 48, 0, 48)
+playerAvatar.Position = UDim2.new(0, 10, 0.5, -24)
+playerAvatar.BackgroundColor3 = FIELD
+playerAvatar.BorderSizePixel = 0
+playerAvatar.ZIndex = 15
+playerAvatar.Parent = profileCard
+
+Corner(playerAvatar, 24)
+AddStroke(playerAvatar, RED_ACCENT, 1.1, 0.18)
+
+pcall(function()
+    local image = game.Players:GetUserThumbnailAsync(
+        LocalPlayer.UserId,
+        Enum.ThumbnailType.HeadShot,
+        Enum.ThumbnailSize.Size100x100
+    )
+
+    playerAvatar.Image = image
+end)
+
+local displayName = Instance.new("TextLabel")
+displayName.Size = UDim2.new(0, 130, 0, 19)
+displayName.Position = UDim2.new(0, 68, 0, 13)
+displayName.BackgroundTransparency = 1
+displayName.Text = LocalPlayer.DisplayName
+displayName.TextColor3 = TEXT
+displayName.Font = Enum.Font.GothamBold
+displayName.TextSize = 12
+displayName.TextXAlignment = Enum.TextXAlignment.Left
+displayName.TextTruncate = Enum.TextTruncate.AtEnd
+displayName.ZIndex = 15
+displayName.Parent = profileCard
+
+local username = Instance.new("TextLabel")
+username.Size = UDim2.new(0, 130, 0, 17)
+username.Position = UDim2.new(0, 68, 0, 33)
+username.BackgroundTransparency = 1
+username.Text = "@" .. LocalPlayer.Name
+username.TextColor3 = MUTED
+username.Font = Enum.Font.GothamMedium
+username.TextSize = 9
+username.TextXAlignment = Enum.TextXAlignment.Left
+username.TextTruncate = Enum.TextTruncate.AtEnd
+username.ZIndex = 15
+username.Parent = profileCard
+
+local accountStatus = Instance.new("TextLabel")
+accountStatus.Size = UDim2.new(0, 130, 0, 14)
+accountStatus.Position = UDim2.new(0, 68, 0, 49)
+accountStatus.BackgroundTransparency = 1
+accountStatus.Text = "ACCOUNT READY"
+accountStatus.TextColor3 = SUCCESS
+accountStatus.Font = Enum.Font.GothamBold
+accountStatus.TextSize = 7
+accountStatus.TextXAlignment = Enum.TextXAlignment.Left
+accountStatus.ZIndex = 15
+accountStatus.Parent = profileCard
+
+local keyPanel = Instance.new("Frame")
+keyPanel.Size = UDim2.new(0, 199, 0, 70)
+keyPanel.Position = UDim2.new(0, 249, 0, 91)
+keyPanel.BackgroundColor3 = PANEL
+keyPanel.BackgroundTransparency = 0.25
+keyPanel.BorderSizePixel = 0
+keyPanel.ZIndex = 14
+keyPanel.Parent = main
+
+Corner(keyPanel, 14)
+AddStroke(keyPanel, Color3.fromRGB(38, 38, 45), 1, 0)
+
+local enterLabel = Instance.new("TextLabel")
+enterLabel.Size = UDim2.new(1, -20, 0, 17)
+enterLabel.Position = UDim2.new(0, 10, 0, 9)
+enterLabel.BackgroundTransparency = 1
+enterLabel.Text = "ACTIVATION KEY"
+enterLabel.TextColor3 = SUBTEXT
+enterLabel.Font = Enum.Font.GothamBold
+enterLabel.TextSize = 8
+enterLabel.TextXAlignment = Enum.TextXAlignment.Left
+enterLabel.ZIndex = 15
+enterLabel.Parent = keyPanel
+
+local keyContainer = Instance.new("Frame")
+keyContainer.Size = UDim2.new(1, -20, 0, 36)
+keyContainer.Position = UDim2.new(0, 10, 0, 28)
+keyContainer.BackgroundColor3 = FIELD
+keyContainer.BorderSizePixel = 0
+keyContainer.ZIndex = 15
+keyContainer.Parent = keyPanel
+
+Corner(keyContainer, 10)
+
+local keyStroke = AddStroke(
+    keyContainer,
+    Color3.fromRGB(43, 43, 51),
+    1,
+    0
+)
+
+local keyAccent = Instance.new("Frame")
+keyAccent.Size = UDim2.new(0, 3, 0, 18)
+keyAccent.Position = UDim2.new(0, 9, 0.5, -9)
+keyAccent.BackgroundColor3 = RED_ACCENT
+keyAccent.BorderSizePixel = 0
+keyAccent.ZIndex = 17
+keyAccent.Parent = keyContainer
+
+Corner(keyAccent, 2)
+
+local keyBox = Instance.new("TextBox")
+keyBox.Size = UDim2.new(1, -27, 1, 0)
+keyBox.Position = UDim2.new(0, 21, 0, 0)
+keyBox.BackgroundTransparency = 1
+keyBox.TextColor3 = TEXT
+keyBox.PlaceholderText = "Enter key"
+keyBox.PlaceholderColor3 = MUTED
+keyBox.Text = ""
+keyBox.Font = Enum.Font.GothamMedium
+keyBox.TextSize = 10
+keyBox.TextXAlignment = Enum.TextXAlignment.Left
+keyBox.ClearTextOnFocus = false
+keyBox.ZIndex = 18
+keyBox.Parent = keyContainer
+
+local actions = Instance.new("Frame")
+actions.Size = UDim2.new(1, -44, 0, 46)
+actions.Position = UDim2.new(0, 22, 0, 174)
+actions.BackgroundTransparency = 1
+actions.ZIndex = 15
+actions.Parent = main
+
+local getKeyBtn = Instance.new("TextButton")
+getKeyBtn.Size = UDim2.new(0.5, -5, 1, 0)
+getKeyBtn.Position = UDim2.new(0, 0, 0, 0)
+getKeyBtn.BackgroundColor3 = PANEL
+getKeyBtn.TextColor3 = SUBTEXT
+getKeyBtn.Font = Enum.Font.GothamBold
+getKeyBtn.TextSize = 9
+getKeyBtn.Text = "GET KEY"
+getKeyBtn.AutoButtonColor = false
+getKeyBtn.ZIndex = 15
+getKeyBtn.Parent = actions
+
+Corner(getKeyBtn, 11)
+
+local getStroke = AddStroke(
+    getKeyBtn,
+    Color3.fromRGB(45, 45, 52),
+    1,
+    0
+)
+
+local verifyBtn = Instance.new("TextButton")
+verifyBtn.Size = UDim2.new(0.5, -5, 1, 0)
+verifyBtn.Position = UDim2.new(0.5, 5, 0, 0)
+verifyBtn.BackgroundColor3 = RED_ACCENT
+verifyBtn.TextColor3 = TEXT
+verifyBtn.Font = Enum.Font.GothamBold
+verifyBtn.TextSize = 9
+verifyBtn.Text = "VERIFY KEY"
+verifyBtn.AutoButtonColor = false
+verifyBtn.ZIndex = 15
+verifyBtn.Parent = actions
+
+Corner(verifyBtn, 11)
+
+local verifyStroke = AddStroke(
+    verifyBtn,
+    RED_BRIGHT,
+    1,
+    0.45
+)
+
+local expiryPanel = Instance.new("Frame")
+expiryPanel.Size = UDim2.new(1, -44, 0, 48)
+expiryPanel.Position = UDim2.new(0, 22, 0, 233)
+expiryPanel.BackgroundColor3 = Color3.fromRGB(22, 10, 15)
+expiryPanel.BackgroundTransparency = 0.2
+expiryPanel.BorderSizePixel = 0
+expiryPanel.ZIndex = 14
+expiryPanel.Parent = main
+
+Corner(expiryPanel, 12)
+AddStroke(expiryPanel, RED_DARK, 1, 0.15)
+
+local expiryTitle = Instance.new("TextLabel")
+expiryTitle.Size = UDim2.new(0, 130, 0, 17)
+expiryTitle.Position = UDim2.new(0, 13, 0, 8)
+expiryTitle.BackgroundTransparency = 1
+expiryTitle.Text = "KEY SESSION"
+expiryTitle.TextColor3 = SUBTEXT
+expiryTitle.Font = Enum.Font.GothamBold
+expiryTitle.TextSize = 8
+expiryTitle.TextXAlignment = Enum.TextXAlignment.Left
+expiryTitle.ZIndex = 15
+expiryTitle.Parent = expiryPanel
+
+local expiryText = Instance.new("TextLabel")
+expiryText.Size = UDim2.new(0, 220, 0, 18)
+expiryText.Position = UDim2.new(0, 13, 0, 23)
+expiryText.BackgroundTransparency = 1
+expiryText.Text = "Valid for 48 hours after verification"
+expiryText.TextColor3 = TEXT
+expiryText.Font = Enum.Font.GothamMedium
+expiryText.TextSize = 9
+expiryText.TextXAlignment = Enum.TextXAlignment.Left
+expiryText.ZIndex = 15
+expiryText.Parent = expiryPanel
+
+local expiryBadge = Instance.new("TextLabel")
+expiryBadge.Size = UDim2.new(0, 120, 0, 26)
+expiryBadge.Position = UDim2.new(1, -133, 0.5, -13)
+expiryBadge.BackgroundColor3 = Color3.fromRGB(30, 30, 36)
+expiryBadge.Text = "48 HOURS"
+expiryBadge.TextColor3 = RED_BRIGHT
+expiryBadge.Font = Enum.Font.GothamBold
+expiryBadge.TextSize = 8
+expiryBadge.ZIndex = 15
+expiryBadge.Parent = expiryPanel
+
+Corner(expiryBadge, 8)
+
+local saveInfo = Instance.new("TextLabel")
+saveInfo.Size = UDim2.new(1, -44, 0, 16)
+saveInfo.Position = UDim2.new(0, 22, 0, 288)
+saveInfo.BackgroundTransparency = 1
+saveInfo.Text = "Your verified key is stored locally for 48 hours"
+saveInfo.TextColor3 = MUTED
+saveInfo.Font = Enum.Font.GothamMedium
+saveInfo.TextSize = 8
+saveInfo.TextXAlignment = Enum.TextXAlignment.Center
+saveInfo.ZIndex = 15
+saveInfo.Parent = main
+
+local status = Instance.new("TextLabel")
+status.Size = UDim2.new(1, -44, 0, 17)
+status.Position = UDim2.new(0, 22, 0, 306)
+status.BackgroundTransparency = 1
+status.Text = "SYSTEM READY"
+status.TextColor3 = MUTED
+status.Font = Enum.Font.GothamBold
+status.TextSize = 8
+status.TextXAlignment = Enum.TextXAlignment.Center
+status.ZIndex = 15
+status.Parent = main
+
+closeBtn.MouseEnter:Connect(function()
+    Tween(closeBtn, 0.16, {
+        BackgroundColor3 = RED_ACCENT,
+        TextColor3 = TEXT
+    }):Play()
+
+    Tween(closeStroke, 0.16, {
+        Color = RED_BRIGHT
+    }):Play()
+end)
+
+closeBtn.MouseLeave:Connect(function()
+    Tween(closeBtn, 0.16, {
+        BackgroundColor3 = PANEL,
+        TextColor3 = SUBTEXT
+    }):Play()
+
+    Tween(closeStroke, 0.16, {
+        Color = Color3.fromRGB(48, 48, 55)
+    }):Play()
+end)
+
+getKeyBtn.MouseEnter:Connect(function()
+    Tween(getKeyBtn, 0.18, {
+        BackgroundColor3 = Color3.fromRGB(30, 30, 36)
+    }):Play()
+
+    Tween(getStroke, 0.18, {
+        Color = RED_ACCENT,
+        Transparency = 0.3
+    }):Play()
+end)
+
+getKeyBtn.MouseLeave:Connect(function()
+    Tween(getKeyBtn, 0.18, {
+        BackgroundColor3 = PANEL
+    }):Play()
+
+    Tween(getStroke, 0.18, {
+        Color = Color3.fromRGB(45, 45, 52),
+        Transparency = 0
+    }):Play()
+end)
+
+verifyBtn.MouseEnter:Connect(function()
+    Tween(verifyBtn, 0.18, {
+        BackgroundColor3 = RED_BRIGHT
+    }):Play()
+end)
+
+verifyBtn.MouseLeave:Connect(function()
+    Tween(verifyBtn, 0.18, {
+        BackgroundColor3 = RED_ACCENT
+    }):Play()
+end)
+
+keyBox.Focused:Connect(function()
+    Tween(keyStroke, 0.2, {
+        Color = RED_ACCENT,
+        Transparency = 0.05
+    }):Play()
+
+    Tween(keyAccent, 0.2, {
+        BackgroundColor3 = RED_BRIGHT
+    }):Play()
+end)
+
+keyBox.FocusLost:Connect(function()
+    Tween(keyStroke, 0.2, {
+        Color = Color3.fromRGB(43, 43, 51),
+        Transparency = 0
+    }):Play()
+
+    Tween(keyAccent, 0.2, {
+        BackgroundColor3 = RED_ACCENT
+    }):Play()
+end)
+
+closeBtn.MouseButton1Click:Connect(function()
+    Tween(main, 0.3, {
+        Size = UDim2.new(0, 390, 0, 270),
+        Position = UDim2.new(0.5, 0, 0.5, 25),
+        BackgroundTransparency = 1
+    }, Enum.EasingStyle.Quint, Enum.EasingDirection.In):Play()
+
+    Tween(mainStroke, 0.2, {
+        Transparency = 1
+    }):Play()
+
+    Tween(blur, 0.25, {
+        Size = 0
+    }):Play()
+
+    task.wait(0.3)
+
+    if blur.Parent then
+        blur:Destroy()
+    end
+
+    if gui.Parent then
+        gui:Destroy()
+    end
+end)
+
+getKeyBtn.MouseButton1Click:Connect(function()
+    Tween(getKeyBtn, 0.08, {
+        Size = UDim2.new(0.5, -9, 1, -4)
+    }):Play()
+
+    task.wait(0.08)
+
+    Tween(getKeyBtn, 0.12, {
+        Size = UDim2.new(0.5, -5, 1, 0)
+    }, Enum.EasingStyle.Back):Play()
+
+    pcall(function()
+        setclipboard(KEY_LINK)
+    end)
+
+    status.Text = "KEY LINK COPIED"
+    status.TextColor3 = SUCCESS
+
+    task.wait(2)
+
+    if gui.Parent then
+        status.Text = "SYSTEM READY"
+        status.TextColor3 = MUTED
+    end
+end)
+
+verifyBtn.MouseButton1Click:Connect(function()
+    Tween(verifyBtn, 0.08, {
+        Size = UDim2.new(0.5, -9, 1, -4)
+    }):Play()
+
+    task.wait(0.08)
+
+    Tween(verifyBtn, 0.12, {
+        Size = UDim2.new(0.5, -5, 1, 0)
+    }, Enum.EasingStyle.Back):Play()
+
+    local enteredKey = keyBox.Text
+
+    if IsValidKey(enteredKey) then
+        SaveKey(enteredKey)
+
+        status.Text = "ACCESS GRANTED"
+        status.TextColor3 = SUCCESS
+
+        verifyBtn.Text = "VERIFIED"
+        verifyBtn.BackgroundColor3 = SUCCESS
+
+        expiryBadge.Text = "48 HOURS"
+        expiryBadge.TextColor3 = SUCCESS
+        expiryBadge.BackgroundColor3 = Color3.fromRGB(8, 35, 25)
+
+        saveInfo.Text = "Key saved locally until the 48 hour session expires"
+
+        Tween(mainStroke, 0.35, {
+            Color = SUCCESS,
+            Transparency = 0.08
+        }):Play()
+
+        Tween(keyStroke, 0.35, {
+            Color = SUCCESS,
+            Transparency = 0.08
+        }):Play()
+
+        task.wait(0.8)
+
+        Tween(main, 0.28, {
+            Size = UDim2.new(0, 370, 0, 250),
+            Position = UDim2.new(0.5, 0, 0.5, -20),
+            BackgroundTransparency = 1
+        }, Enum.EasingStyle.Quint, Enum.EasingDirection.In):Play()
+
+        Tween(mainStroke, 0.2, {
+            Transparency = 1
+        }):Play()
+
+        Tween(blur, 0.25, {
+            Size = 0
+        }):Play()
+
+        task.wait(0.28)
+
+        if blur.Parent then
+            blur:Destroy()
+        end
+
+        if gui.Parent then
+            gui:Destroy()
+        end
+
+        CreateLoadingScreen()
+        ExecuteHub()
+    else
+        status.Text = "INVALID SECURITY KEY"
+        status.TextColor3 = RED_BRIGHT
+
+        keyBox.Text = ""
+
+        Tween(keyStroke, 0.12, {
+            Color = RED_BRIGHT
+        }):Play()
+
+        local originalPosition = keyContainer.Position
+
+        for _ = 1, 3 do
+            Tween(keyContainer, 0.055, {
+                Position = originalPosition + UDim2.new(0, 6, 0, 0)
+            }):Play()
+
+            task.wait(0.055)
+
+            Tween(keyContainer, 0.055, {
+                Position = originalPosition - UDim2.new(0, 6, 0, 0)
+            }):Play()
+
+            task.wait(0.055)
+        end
+
+        Tween(keyContainer, 0.1, {
+            Position = originalPosition
+        }):Play()
+
+        task.wait(1.5)
+
+        if gui.Parent then
+            status.Text = "SYSTEM READY"
+            status.TextColor3 = MUTED
+
+            Tween(keyStroke, 0.2, {
+                Color = Color3.fromRGB(43, 43, 51)
+            }):Play()
+        end
+    end
+end)
+
+task.spawn(function()
+    while gui.Parent do
+        Tween(logoHolder, 2, {
+            Position = UDim2.new(0, 22, 0, 8)
+        }, Enum.EasingStyle.Sine):Play()
+
+        task.wait(2)
+
+        Tween(logoHolder, 2, {
+            Position = UDim2.new(0, 22, 0, 11)
+        }, Enum.EasingStyle.Sine):Play()
+
+        task.wait(2)
+    end
+end)
+
+task.spawn(function()
+    while gui.Parent do
+        local remaining = GetRemainingTime()
+
+        if remaining > 0 then
+            expiryText.Text = "Session active for " .. FormatRemainingTime(remaining)
+            expiryBadge.Text = FormatRemainingTime(remaining):upper()
+            expiryBadge.TextColor3 = RED_BRIGHT
+        else
+            expiryText.Text = "Valid for 48 hours after verification"
+            expiryBadge.Text = "48 HOURS"
+        end
+
+        task.wait(30)
+    end
+end)
+
+Tween(blur, 0.35, {
+    Size = 8
+}):Play()
+
+Tween(main, 0.65, {
+    Position = UDim2.new(0.5, 0, 0.5, 0)
+}, Enum.EasingStyle.Back, Enum.EasingDirection.Out):Play()
+
+Tween(mainStroke, 0.8, {
+    Transparency = 0.28
+}):Play()
