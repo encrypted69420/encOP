@@ -1090,7 +1090,6 @@ function Loader.new(cfg)
         return loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
     end)
     if not fluentOk or not fluentLib then
-        warn("[Script Loader] Failed to load Fluent UI library!")
         return self
     end
     self.libs = { Fluent = fluentLib }
@@ -1099,15 +1098,9 @@ function Loader.new(cfg)
 end
 
 function Loader:_initUI()
-    if not self.libs.Fluent then
-        warn("[Script Loader] Fluent UI not available, cannot create window.")
-        return
-    end
+    if not self.libs.Fluent then return end
     local win = self.libs.Fluent:CreateWindow(self.cfg.Window)
-    if not win then
-        warn("[Script Loader] Failed to create Fluent window.")
-        return
-    end
+    if not win then return end
     self.window = win
     self.tabs = {
         Scripts = win:AddTab({ Title = "Scripts", Icon = "list" }),
@@ -1140,25 +1133,22 @@ function Loader:_loadScript(url)
     if self.libs.Fluent and self.libs.Fluent.Unload then
         self.libs.Fluent:Unload()
     end
-    local ok, err = pcall(function()
+    pcall(function()
         loadstring(game:HttpGet(url))()
     end)
-    if not ok then
-        warn("[Script Loader Error]", err)
-    end
 end
 
 function Loader:_addInfo()
     self.tabs.Info:AddParagraph({
         Title = "About",
-        Content = "Script Loader by @iamvyxon\nGitHub: https://github.com/iamvyxon\n\nSelect a script from the Scripts tab. Confirm before loading. Loader UI will close after loading."
+        Content = "Enchanted Hub Loader\nScripts by @iblameaabis\n\nSelect a script from the Scripts tab. Loader UI will close after loading."
     })
 end
 
 local Config = {
     Window = {
         Title        = "Enchanted Hub Loader",
-        SubTitle     = "Loader by @iamvyxon | Scripts by @iblameaabis",
+        SubTitle     = "Scripts by @iblameaabis",
         TabWidth     = 160,
         Size         = UDim2.fromOffset(580, 460),
         Acrylic      = true,
@@ -1175,8 +1165,8 @@ local Config = {
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Football_For_Brain.txt"
         },
         {
-            Name = "+1 Speed Monkey Escape",
-            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Monkey_Esc.txt"
+            Name = "+1 Loot To Forge",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_1_Loot_To_Forge.txt"
         },
         {
             Name = "+1 Speed Bridge Build",
@@ -1187,12 +1177,20 @@ local Config = {
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Speed_Collect_Minion.txt"
         },
         {
+            Name = "+1 Speed Monkey Escape",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Monkey_Esc.txt"
+        },
+        {
             Name = "+1 Speed Per Click",
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Speed_Per_Click.txt"
         },
         {
             Name = "+1 Speedster Escape",
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Speedster_Escape.txt"
+        },
+        {
+            Name = "Arise Crossover",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Arise_Crossover.txt"
         },
         {
             Name = "Basketball Legends",
@@ -1207,12 +1205,12 @@ local Config = {
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Hub_Blade_Ball.lua.txt"
         },
         {
-            Name = "Build A Boat For Treasure",
-            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_babft.txt"
-        },
-        {
             Name = "Bubble Gum Simulator",
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_BubbleGum.txt"
+        },
+        {
+            Name = "Build A Boat For Treasure",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_babft.txt"
         },
         {
             Name = "Car Dealership Tycoon",
@@ -1221,6 +1219,10 @@ local Config = {
         {
             Name = "Demonology",
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Demonology.txt"
+        },
+        {
+            Name = "Evade",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Evade.txt"
         },
         {
             Name = "Jump For Animals",
@@ -1271,8 +1273,16 @@ local Config = {
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Plants_V_Brainrots.txt"
         },
         {
+            Name = "Punch Simulator",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Punch_Simulator.txt"
+        },
+        {
             Name = "Ride A Pet",
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Ride_A_Pet.lua.txt"
+        },
+        {
+            Name = "Sailor Piece",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Sailor_Piece.txt"
         },
         {
             Name = "Sell Lemons",
@@ -1289,7 +1299,7 @@ local Config = {
         {
             Name = "Steal Animal Egg",
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Steal_Animal_Egg.txt"
-        }, 
+        },
         {
             Name = "Supermarket Simulator",
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Supermarket.txt"
