@@ -1189,6 +1189,10 @@ local Config = {
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Speedster_Escape.txt"
         },
         {
+            Name = "Anime Power",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Anime_Power.txt"
+        },
+        {
             Name = "Arise Crossover",
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Arise_Crossover.txt"
         },
@@ -1203,6 +1207,14 @@ local Config = {
         {
             Name = "Blade Ball",
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Hub_Blade_Ball.lua.txt"
+        },
+        {
+            Name = "Break & Steal An Egg",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Break__Steal_An_Egg.txt"
+        },
+        {
+            Name = "Break Bones IV",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Break_Bones_IV.txt"
         },
         {
             Name = "Bubble Gum Simulator",
@@ -1221,8 +1233,16 @@ local Config = {
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Demonology.txt"
         },
         {
+            Name = "Doors",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Doors.txt"
+        },
+        {
             Name = "Evade",
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Evade.txt"
+        },
+        {
+            Name = "Huss Valley",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Huss_Valley.txt"
         },
         {
             Name = "Jump For Animals",
@@ -1289,6 +1309,10 @@ local Config = {
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Sell_Lemons.txt"
         },
         {
+            Name = "Slime RNG",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Slime_RNG.txt"
+        },
+        {
             Name = "Sniper Arena",
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Sniper_Arena.txt"
         },
@@ -1307,6 +1331,10 @@ local Config = {
         {
             Name = "Survive Zombie Arena",
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Survive_Zombie.txt"
+        },
+        {
+            Name = "Tap Simulator",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Tap_Simulator.txt"
         }
     },
 }
