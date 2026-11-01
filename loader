@@ -1126,7 +1126,7 @@ function Loader:_addScriptButtons()
 end
 
 function Loader:_loadScript(url)
-    self.libs.Fluent:Notify({ Title = "Loading...", Content = "EH#1", Duration = 3 })
+    self.libs.Fluent:Notify({ Title = "Loading...", Content = url, Duration = 3 })
     if self.window and self.window.Destroy then
         self.window:Destroy()
     end
@@ -1157,6 +1157,10 @@ local Config = {
     },
     Scripts = {
         {
+            Name = "+1 Ammo Per Click",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/Enchanted%20%2B1%20Ammo%20Per%20Click.txt"
+        },
+        {
             Name = "+1 Drain Water Per Click",
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_1_Drain_Water.txt"
         },
@@ -1167,6 +1171,10 @@ local Config = {
         {
             Name = "+1 Loot To Forge",
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_1_Loot_To_Forge.txt"
+        },
+        {
+            Name = "+1 Money Per Click",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/Enchanted%20%2B1%20money%20per%20click.txt"
         },
         {
             Name = "+1 Speed Bridge Build",
@@ -1225,8 +1233,16 @@ local Config = {
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_babft.txt"
         },
         {
+            Name = "Bullets VS Everything",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/Enchanted%20Bullets%20VS%20Everything.txt"
+        },
+        {
             Name = "Car Dealership Tycoon",
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Car_Dealership.txt"
+        },
+        {
+            Name = "Climb For Eggs",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/Enchanted%20Climb%20For%20Eggs.txt"
         },
         {
             Name = "Demonology",
@@ -1237,8 +1253,20 @@ local Config = {
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Doors.txt"
         },
         {
+            Name = "Dungeon Quest Reborn",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/Enchanted%20Dungeon%20Quest%20Reborn.txt"
+        },
+        {
             Name = "Evade",
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Evade.txt"
+        },
+        {
+            Name = "Fake An Egg",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/Enchanted%20Fake%20An%20Egg.txt"
+        },
+        {
+            Name = "Fling Things & People",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/Enchanted%20Fling%20Things%20%26%20People.txt"
         },
         {
             Name = "Huss Valley",
@@ -1265,6 +1293,10 @@ local Config = {
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Merge_Nuke.txt"
         },
         {
+            Name = "Merge For SPEED",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/Enchanted%20Merge%20For%20SPEED.txt"
+        },
+        {
             Name = "Midnight Chasers: Highway Racing",
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Midnight_Chaser.txt"
         },
@@ -1275,6 +1307,14 @@ local Config = {
         {
             Name = "Muscle Legends",
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_ML.txt"
+        },
+        {
+            Name = "Nuke For Brainrot",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/Enchanted%20Nuke%20For%20Brainrot.txt"
+        },
+        {
+            Name = "Obby But Your On a Bike",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/Enchanted%20Obby%20But%20Your%20On%20a%20Bike.txt"
         },
         {
             Name = "One Tap",
@@ -1293,12 +1333,20 @@ local Config = {
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Plants_V_Brainrots.txt"
         },
         {
+            Name = "Pls Donate",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/Enchanted%20Pls%20Donate.txt"
+        },
+        {
             Name = "Punch Simulator",
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Punch_Simulator.txt"
         },
         {
             Name = "Ride A Pet",
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Ride_A_Pet.lua.txt"
+        },
+        {
+            Name = "Sailor Peace",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/Enchanted%20Sailor%20Peace.txt"
         },
         {
             Name = "Sailor Piece",
@@ -1325,8 +1373,20 @@ local Config = {
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Steal_Animal_Egg.txt"
         },
         {
+            Name = "Strongman Simulator",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/Enchanted%20Strongman%20Simulator.txt"
+        },
+        {
             Name = "Supermarket Simulator",
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Supermarket.txt"
+        },
+        {
+            Name = "Superstar Baseball",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/Enchanted%20Superstar%20Baseball.txt"
+        },
+        {
+            Name = "Survive The Sniper",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/Enchanted%20Survive%20The%20Sniper.txt"
         },
         {
             Name = "Survive Zombie Arena",
@@ -1335,6 +1395,10 @@ local Config = {
         {
             Name = "Tap Simulator",
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Tap_Simulator.txt"
+        },
+        {
+            Name = "UBG v2",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/Enchanted%20UBG%20v2.txt"
         }
     },
 }
