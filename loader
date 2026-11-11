@@ -1169,6 +1169,14 @@ local Config = {
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Football_For_Brain.txt"
         },
         {
+            Name = "+1 Looks Per Click",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/Enchanted%20%2B1%20Looks%20Per%20Click.txt"
+        },
+        {
+            Name = "+1 Loot Evo",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/Enchanted%20%2B1%20Loot%20Evo.txt"
+        },
+        {
             Name = "+1 Loot To Forge",
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_1_Loot_To_Forge.txt"
         },
@@ -1189,6 +1197,10 @@ local Config = {
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Monkey_Esc.txt"
         },
         {
+            Name = "+1 Speed Ninja Escape",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/Enchanted%20%2B1%20Speed%20Ninja%20Escape.txt"
+        },
+        {
             Name = "+1 Speed Per Click",
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Speed_Per_Click.txt"
         },
@@ -1197,12 +1209,32 @@ local Config = {
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Speedster_Escape.txt"
         },
         {
+            Name = "+1 Strength Per Click",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/Enchanted%20%2B1%20Strength%20Per%20Click.txt"
+        },
+        {
+            Name = "+1 Superhero Evolution",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/Enchanted%20%2B1%20Superhero%20Evolution.txt"
+        },
+        {
             Name = "Anime Power",
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Anime_Power.txt"
         },
         {
             Name = "Arise Crossover",
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Arise_Crossover.txt"
+        },
+        {
+            Name = "Arsenal",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/Enchanted%20Arsenal.txt"
+        },
+        {
+            Name = "Aura For Brainrots",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/Enchanted%20Aura%20For%20Brainrots.txt"
+        },
+        {
+            Name = "Ball VS Ball",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/Enchanted%20Ball%20VS%20Ball.txt"
         },
         {
             Name = "Basketball Legends",
@@ -1241,6 +1273,14 @@ local Config = {
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Car_Dealership.txt"
         },
         {
+            Name = "Chop Trees For Treasure",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/Enchanted%20Chop%20Trees%20For%20Treasure.txt"
+        },
+        {
+            Name = "Clicker Simulator",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/Enchanted%20Clicker%20Simulator.txt"
+        },
+        {
             Name = "Climb For Eggs",
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/Enchanted%20Climb%20For%20Eggs.txt"
         },
@@ -1249,8 +1289,16 @@ local Config = {
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Demonology.txt"
         },
         {
+            Name = "Dig & Clean",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/Enchanted%20Dig%20%26%20Clean.txt"
+        },
+        {
             Name = "Doors",
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Doors.txt"
+        },
+        {
+            Name = "Drill Blocks For Brainrots",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/Enchanted%20Drill%20Blocks%20For%20Brainrots.txt"
         },
         {
             Name = "Dungeon Quest Reborn",
@@ -1397,9 +1445,13 @@ local Config = {
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Tap_Simulator.txt"
         },
         {
+            Name = "Tower Defence Simulator",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/Enchanted%20Tower%20Defence%20Simulator.txt"
+        },
+        {
             Name = "UBG v2",
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/Enchanted%20UBG%20v2.txt"
-        }
+        },
     },
 }
 
