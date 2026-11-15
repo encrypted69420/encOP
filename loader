@@ -1225,6 +1225,10 @@ local Config = {
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Arise_Crossover.txt"
         },
         {
+            Name = "Arm Wrestling Simulator",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/Enchanted%20Arm%20Wrestling%20Simulator.txt"
+        },
+        {
             Name = "Arsenal",
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/Enchanted%20Arsenal.txt"
         },
@@ -1313,8 +1317,24 @@ local Config = {
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/Enchanted%20Fake%20An%20Egg.txt"
         },
         {
+            Name = "Flee The Facility",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/Enchanted%20Flee%20The%20Facility.txt"
+        },
+        {
             Name = "Fling Things & People",
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/Enchanted%20Fling%20Things%20%26%20People.txt"
+        },
+        {
+            Name = "Forsaken",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/Enchanted%20Forsaken.txt"
+        },
+        {
+            Name = "Funky Friday",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/Enchanted%20Funky%20Friday.txt"
+        },
+        {
+            Name = "Fust Survival",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/Enchanted%20Fust%20Survival.txt"
         },
         {
             Name = "Huss Valley",
@@ -1347,6 +1367,10 @@ local Config = {
         {
             Name = "Midnight Chasers: Highway Racing",
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Midnight_Chaser.txt"
+        },
+        {
+            Name = "Moo Moo Mystery",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/Enchanted%20Moo%20Moo%20Mystery.txt"
         },
         {
             Name = "Murder Mystery 2",
@@ -1421,6 +1445,10 @@ local Config = {
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Steal_Animal_Egg.txt"
         },
         {
+            Name = "Steal From The Rich",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/Enchanted%20Steal%20From%20The%20Rich.txt"
+        },
+        {
             Name = "Strongman Simulator",
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/Enchanted%20Strongman%20Simulator.txt"
         },
@@ -1443,6 +1471,10 @@ local Config = {
         {
             Name = "Tap Simulator",
             Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/obf2_Enchanted_Tap_Simulator.txt"
+        },
+        {
+            Name = "Throw Food For Animals",
+            Url  = "https://raw.githubusercontent.com/encrypted69420/encOP/refs/heads/main/Enchanted%20Throw%20Food%20For%20Animals.txt"
         },
         {
             Name = "Tower Defence Simulator",
