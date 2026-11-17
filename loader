@@ -1126,7 +1126,7 @@ function Loader:_addScriptButtons()
 end
 
 function Loader:_loadScript(url)
-    self.libs.Fluent:Notify({ Title = "Loading...", Content = url, Duration = 3 })
+    self.libs.Fluent:Notify({ Title = "Loading...", Content = "EH#1", Duration = 3 })
     if self.window and self.window.Destroy then
         self.window:Destroy()
     end
